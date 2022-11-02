@@ -16,11 +16,11 @@
 
 #define device_ID 7203
 
-int led_blinking_times (int device_id, int i) {
-    int led1 = device_id / 1000;
-    int led2 = (device_id % 1000) / 100;
-    int led3 = ((device_id % 1000) % 100) / 10;
-    int led4 = ((device_id % 1000) % 100) % 10;
+int led_blinking_times (int i) {
+    int led1 = device_ID / 1000;
+    int led2 = (device_ID % 1000) / 100;
+    int led3 = ((device_ID % 1000) % 100) / 10;
+    int led4 = ((device_ID % 1000) % 100) % 10;
     if (i == 0) {
         return led1;
     } else if (i == 1) {
@@ -36,8 +36,8 @@ int led_blinking_times (int device_id, int i) {
 
 
 
-void led_blinking (int a, int b) {
-    for (int i = 0; i < 2*b; i++) {
+void led_blinking (int a) {
+    for (int i = 0; i < 2*led_blinking_times(a); i++) {
         bsp_board_led_invert(a);
         nrf_delay_ms(100);
     }
@@ -56,7 +56,7 @@ int main(void)
     {
         for (int i = 0; i < LEDS_NUMBER; i++)
         {
-            led_blinking(i, led_blinking_times(device_ID, i));
+            led_blinking(i);
             nrf_delay_ms(1000);
         }
     }
