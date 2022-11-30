@@ -10,10 +10,6 @@ extern volatile bool double_click;
 #define BUTTON NRF_GPIO_PIN_MAP(1, 6)
 
 APP_TIMER_DEF(m_debouncing_timer_id);
-
-#define DEBOUNCING_PROCESS_MS 50
-
-
 //-----------------------------------------------------
 void init_board_button(void);
 void gpiote_init(void);
